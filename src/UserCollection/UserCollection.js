@@ -1,59 +1,94 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import "./UserCollection.css";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import MobileDateTimePicker from "@mui/lab/MobileDateTimePicker";
 import Stack from "@mui/material/Stack";
-import DateTime from "../Components/DateTime";
+import Autocomplete from "@mui/material/Autocomplete";
 
-const tempoStaf = [];
+const options = ["In Time", "Out Time"];
 
-const UserCollection = ({ inOut, date, inputValue }) => {
-  const initialInfo = { date: date };
-  const [info, setInfo] = useState(initialInfo);
-  console.log(inOut);
+const UserCollection = ({ date, setDate }) => {
+  const [inputValue, setInputValue] = React.useState("");
+  const [value, setValue] = React.useState(options[0]);
+  const form = useRef();
 
-  // collecting data
+  const [pin, setPin] = useState();
+  const [inO, setInO] = useState(
 
-  const onBlur = (e) => {
-    // const scanned = e.target.value;
-    const input = e.target.value;
-    const inputValue = e.target.value;
+    );
+    // console.log(inputValue);
 
-    const newPunch = { ...info };
+  const [now, setNow] = useState((date = date.toString()));
 
-    newPunch[input] = value;
+  const sendStafAtt = (e) => {
+    // pin = e.target.value
+    const atten = e.target.value;
+    const inO = inputValue;
 
-    setInfo(newPunch);
 
-    console.log(newPunch);
+    const newPunch = { atten, inO, now };
 
+    
+
+    // console.log(newPunch);
+    const punch = {
+      newPunch,
+    };
+    console.log(punch);
+
+    fetch('http://localhost:5000/punchs',{
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(punch)
+    })
+    .then(res => res.json())
+    .then(data => {
+      
+    })
+
+    
     e.preventDefault();
   };
 
-  const defaultProps = {
-    options: tempoStaf,
-    getOptionLabel: (option) => option.pin,
-  };
-
-  const flatProps = {
-    options: tempoStaf.map((option) => option.pin),
-  };
-
-  const [value, setValue] = React.useState(null);
-
   return (
-    <Stack spacing={4} sx={{ width: 300 }}>
-      <Autocomplete
-        {...defaultProps}
-        id="auto-complete"
-        autoComplete
-        name="input"
-        includeInputInList
-        onBlur={onBlur}
-        renderInput={(params) => (
-          <TextField {...params} label="Scan your id card" variant="standard" />
-        )}
-      />
-    </Stack>
+    <Container>
+      <Row style={{ alignItems: "center", textAlign: "center" }}>
+        <h1 className="text-white-50 font-semibold">Aarong</h1>
+        <Col md={12}>
+          <div class="l-form">
+            <form ref={form} onBlur={sendStafAtt} class="form">
+              <Autocomplete
+                value={inO}
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                }}
+                inputValue={inputValue}
+                onInputChange={(event, newInputValue) => {
+                  setInputValue(newInputValue);
+                }}
+                id="controllable-states-demo"
+                options={options}
+                sx={{ width: 300 }}
+                renderInput={(params) => (
+                  <TextField {...params} label="In Time  and Out Time" />
+                )}
+              />
+              <div class="form__div">
+                <input class="form__input" />
+                <label for="number" class="form__label">
+                  Number
+                </label>
+              </div>
+            </form>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

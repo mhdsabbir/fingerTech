@@ -24,23 +24,18 @@ function App() {
   
   return (
     <div className="App">
-      {/* <Inputs></Inputs> */}
 
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Item>
-              <DateTime ></DateTime>
-              <Attendance inputValue={inputValue} setInputValue= {setInputValue} ></Attendance>
+              <DateTime></DateTime>
+              </Item>
+            <Item>
               <UserCollection date={date} setDate={setDate}></UserCollection>
             </Item>
           </Grid>
-          <Grid item xs={6}>
-            <Item>
-              Information
-
-            </Item>
-          </Grid>
+          
           
         </Grid>
       </Box>
