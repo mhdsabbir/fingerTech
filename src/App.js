@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import UserCollection from "./UserCollection/UserCollection";
+import { Card } from "react-bootstrap";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -18,28 +19,41 @@ const Item = styled(Paper)(({ theme }) => ({
 function App() {
   const [date, setDate] = React.useState(new Date());
   const [updateTime, setUpDateTime] = useState();
+  // In Out
+
   useEffect(() => {
     setInterval(() => {
       setUpDateTime((date) => new Date());
     }, 1000);
   }, []);
-  
+
   return (
     <div className="App">
-
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
+          <Grid item md={12}>
+            <Card style={{ width: "18rem", border: 'none'}}>
+              <Card.Body >
+                <Card.Title style={{fontSize: "44px"}}>Aarong</Card.Title>
+                
+              </Card.Body>
+              
+              
+            </Card>
+          </Grid>
           <Grid item xs={12}>
             <Item>
               <DateTime></DateTime>
-              
-              </Item>
+            </Item>
             <Item>
-              <UserCollection date={date} setDate={setDate} updateTime={updateTime} setUpDateTime={setUpDateTime}></UserCollection>
+              <UserCollection
+                date={date}
+                setDate={setDate}
+                updateTime={updateTime}
+                setUpDateTime={setUpDateTime}
+              ></UserCollection>
             </Item>
           </Grid>
-          
-          
         </Grid>
       </Box>
     </div>
