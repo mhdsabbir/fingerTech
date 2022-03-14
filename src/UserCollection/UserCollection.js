@@ -10,32 +10,29 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Display from "./Display";
 
 
+
 const UserCollection = ({ date }) => {
   const form = useRef();
   const [success, setSuccess] = useState();
+  
 
   const [now, setNow] = useState(
-    (date = date.toLocaleDateString() + " " + date.toLocaleTimeString())
+    (date =
+      date.toLocaleDateString() +
+      " " +
+      date.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }))
   );
 
-  
   const onBlur = (e) => {
+    const pin = e.target.value;
 
-    
-    const pin = e.target.value
-
-
-
-    const stafId = Number(pin)
-
-
+    const stafId = Number(pin);
 
     const newPunch = { stafId, now };
-
-
-// console.log(newPunch);
-
-
 
     fetch("https://boiling-cove-11605.herokuapp.com/punchs", {
       method: "POST",
@@ -49,8 +46,19 @@ const UserCollection = ({ date }) => {
         if (data.insertedId) {
           
           setSuccess(true);
+          
         }
       });
+
+      if(setSuccess = true){
+        
+          window.location.reload(true)
+        
+      }
+
+    
+
+
 
     e.preventDefault();
   };
@@ -62,23 +70,18 @@ const UserCollection = ({ date }) => {
           <Col md={12}>
             <div class="l-form">
               <form ref={form} onBlur={onBlur} class="form">
-                
                 <div class="form__div">
                   <input class="form__input" />
                   <label for="number" class="form__label">
                     Number
                   </label>
-                  </div>
-                  
-                  
-
+                </div>
               </form>
             </div>
-                {success && <Alert severity="success">Welcome</Alert>}
+            {success && <Alert severity="success">Welcome</Alert>}
           </Col>
         </Row>
         <Display></Display>
-        
       </Container>
     </>
   );

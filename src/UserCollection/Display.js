@@ -10,7 +10,6 @@ const headers = [
 
 const Display = () => {
   const [sheet, setSheet] = useState([]);
-  const headings = ["Pin", "Time"];
 
   const csvReport = {
     filename: 'report.csv',
@@ -28,30 +27,24 @@ const Display = () => {
   }, []);
   
   
-//   const exportOnclick = (e) =>{
-//       let result_table = sheet
-//       console.log(result_table);
-      
-    
-//   }
+
   return (
     <div>
-      {/* <button onClick={exportOnclick} type="submit">
-        Export Data
-      </button> */}
       <CSVLink {...csvReport}>Export csv</CSVLink>
 
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>Pin</th>
+            <th>Date</th>
             <th>Time</th>
           </tr>
         </thead>
         {sheet.map((pd) => (
           <tr>
             <td>{pd.stafId}</td>
-            <td>{pd.now}</td>
+            <td>{pd.now.slice(0, 10)}</td>
+            <td>{pd.now.slice(12, 19)}</td>
           </tr>
         ))}
       </Table>
