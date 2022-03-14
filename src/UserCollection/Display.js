@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
 import { CSVLink } from "react-csv";
 
 const headers = [
@@ -32,22 +31,7 @@ const Display = () => {
     <div>
       <CSVLink {...csvReport}>Export csv</CSVLink>
 
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Pin</th>
-            <th>Date</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-        {sheet.map((pd) => (
-          <tr>
-            <td>{pd.stafId}</td>
-            <td>{pd.now.slice(0, 10)}</td>
-            <td>{pd.now.slice(12, 19)}</td>
-          </tr>
-        ))}
-      </Table>
+      
     </div>
   );
 };
