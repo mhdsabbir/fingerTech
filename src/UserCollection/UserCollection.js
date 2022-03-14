@@ -9,12 +9,9 @@ import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import Display from "./Display";
 
-
-
 const UserCollection = ({ date }) => {
   const form = useRef();
   const [success, setSuccess] = useState();
-  
 
   const [now, setNow] = useState(
     (date =
@@ -44,21 +41,14 @@ const UserCollection = ({ date }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
-          
           setSuccess(true);
-          
+        }
+        if (data.insertedId) {
+          window.location.reload();
+          newPunch.clear();
         }
       });
-
-      if(setSuccess = true){
-        
-          window.location.reload(true)
-        
-      }
-
     
-
-
 
     e.preventDefault();
   };

@@ -21,6 +21,12 @@ function App() {
   const [date, setDate] = React.useState(new Date());
   
   const [inputValue, setInputValue] = React.useState("");
+
+  function callMe() {
+    setInterval(()=>{
+      new Date()
+    }, 100)
+  }
   
   return (
     <div className="App">
@@ -30,6 +36,7 @@ function App() {
           <Grid item xs={12}>
             <Item>
               <DateTime></DateTime>
+              {callMe()}
               </Item>
             <Item>
               <UserCollection date={date} setDate={setDate}></UserCollection>
