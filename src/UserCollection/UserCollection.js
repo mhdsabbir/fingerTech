@@ -22,7 +22,7 @@ const UserCollection = ({ updateTime }) => {
     
   );
 
-  console.log(updateTime);
+  // console.log(updateTime);
 
 
 
