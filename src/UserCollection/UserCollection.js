@@ -58,10 +58,9 @@ const UserCollection = ({ date, setDate }) => {
   return (
     <Container>
       <Row style={{ alignItems: "center", textAlign: "center" }}>
-        <h1 className="text-white-50 font-semibold">Aarong</h1>
         <Col md={12}>
           <div class="l-form">
-            <form ref={form} onBlur={sendStafAtt} class="form">
+            <form ref={form} onSubmit={sendStafAtt} class="form">
               <Autocomplete
                 value={inO}
                 onChange={(event, newValue) => {
