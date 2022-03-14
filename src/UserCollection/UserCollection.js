@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import "./UserCollection.css";
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -7,87 +7,80 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import MobileDateTimePicker from "@mui/lab/MobileDateTimePicker";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
+import Display from "./Display";
 
-const options = ["In Time", "Out Time"];
 
-const UserCollection = ({ date, setDate }) => {
-  const [inputValue, setInputValue] = React.useState("");
-  const [value, setValue] = React.useState(options[0]);
+const UserCollection = ({ date }) => {
   const form = useRef();
+  const [success, setSuccess] = useState();
 
-  const [pin, setPin] = useState();
-  const [inO, setInO] = useState(
-
-    );
-    // console.log(inputValue);
-
-    const [now, setNow] = useState((date = date.toLocaleDateString() + ' ' + date.toLocaleTimeString()));
-    // const [time, setTime] = useState((date = date.toLocaleTimeString()));
+  const [now, setNow] = useState(
+    (date = date.toLocaleDateString() + " " + date.toLocaleTimeString())
+  );
 
   
-
-  const sendStafAtt = (e) => {
-    // pin = e.target.value
-    const atten = e.target.value;
-    const inO = inputValue;
-
-
-    const newPunch = { atten, inO, now };
+  const onBlur = (e) => {
 
     
-    const punch = {
-      newPunch,
-    };
+    const pin = e.target.value
 
 
-    fetch('https://boiling-cove-11605.herokuapp.com/punchs',{
-      method: 'POST',
+
+    const stafId = Number(pin)
+
+
+
+    const newPunch = { stafId, now };
+
+
+// console.log(newPunch);
+
+
+
+    fetch("https://boiling-cove-11605.herokuapp.com/punchs", {
+      method: "POST",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
-      body: JSON.stringify(punch)
+      body: JSON.stringify(newPunch),
     })
-    .then(res => res.json())
-    .then(data => {
-      
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          
+          setSuccess(true);
+        }
+      });
 
-    
+    e.preventDefault();
   };
 
   return (
-    <Container>
-      <Row style={{ alignItems: "center", textAlign: "center" }}>
-        <Col md={12}>
-          <div class="l-form">
-            <form ref={form} onBlur={sendStafAtt} class="form">
-              <Autocomplete
-                value={inO}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
-                inputValue={inputValue}
-                onInputChange={(event, newInputValue) => {
-                  setInputValue(newInputValue);
-                }}
-                id="controllable-states-demo"
-                options={options}
-                sx={{ width: 300 }}
-                renderInput={(params) => (
-                  <TextField {...params} label="In Time  and Out Time" />
-                )}
-              />
-              <div class="form__div">
-                <input class="form__input" />
-                <label for="number" class="form__label">
-                  Number
-                </label>
-              </div>
-            </form>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <Container>
+        <Row style={{ alignItems: "center", textAlign: "center" }}>
+          <Col md={12}>
+            <div class="l-form">
+              <form ref={form} onBlur={onBlur} class="form">
+                
+                <div class="form__div">
+                  <input class="form__input" />
+                  <label for="number" class="form__label">
+                    Number
+                  </label>
+                  </div>
+                  
+                  
+
+              </form>
+            </div>
+                {success && <Alert severity="success">Welcome</Alert>}
+          </Col>
+        </Row>
+        <Display></Display>
+        
+      </Container>
+    </>
   );
 };
 
