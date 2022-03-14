@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Alert, Col, Container, Row } from "react-bootstrap";
 import "./UserCollection.css";
 import TextField from "@mui/material/TextField";
@@ -9,20 +9,28 @@ import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import Display from "./Display";
 
-const UserCollection = ({ date }) => {
+const UserCollection = ({ updateTime }) => {
   const form = useRef();
   const [success, setSuccess] = useState();
-
+  
+  
+  
+  
   const [now, setNow] = useState(
-    (date =
-      date.toLocaleDateString() +
+    updateTime =
+    updateTime.toLocaleDateString() +
       " " +
-      date.toLocaleTimeString("en-US", {
+      updateTime.toLocaleTimeString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
+        second: "2-digit",
         hour12: true,
-      }))
+      })
+    
   );
+
+  console.log(updateTime);
+
 
   const onBlur = (e) => {
     const pin = e.target.value;
@@ -48,7 +56,6 @@ const UserCollection = ({ date }) => {
           newPunch.clear();
         }
       });
-    
 
     e.preventDefault();
   };

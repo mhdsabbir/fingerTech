@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import DateTime from "./Components/DateTime";
 import { styled } from "@mui/material/styles";
@@ -22,11 +22,13 @@ function App() {
   
   const [inputValue, setInputValue] = React.useState("");
 
-  function callMe() {
-    setInterval(()=>{
-      new Date()
-    }, 100)
-  }
+  const [updateTime, setUpDateTime] = useState();
+
+  useEffect(() => {
+    setInterval(() => {
+      setUpDateTime((date) => new Date());
+    }, 1000);
+  }, []);
   
   return (
     <div className="App">
@@ -36,10 +38,10 @@ function App() {
           <Grid item xs={12}>
             <Item>
               <DateTime></DateTime>
-              {callMe()}
+              
               </Item>
             <Item>
-              <UserCollection date={date} setDate={setDate}></UserCollection>
+              <UserCollection updateTime={updateTime} setUpDateTime={setUpDateTime}></UserCollection>
             </Item>
           </Grid>
           
