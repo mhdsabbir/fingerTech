@@ -7,7 +7,7 @@ import Stack from "@mui/material/Stack";
 
 const DateTime = ({date, setDate}) => {
 
-
+// console.log(date);
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Stack spacing={3}>

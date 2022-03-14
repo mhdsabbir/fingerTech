@@ -1,37 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Alert, Col, Container, Row } from "react-bootstrap";
 import "./UserCollection.css";
-import TextField from "@mui/material/TextField";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import MobileDateTimePicker from "@mui/lab/MobileDateTimePicker";
-import Stack from "@mui/material/Stack";
-import Autocomplete from "@mui/material/Autocomplete";
 import Display from "./Display";
 
-const UserCollection = ({ updateTime }) => {
+const UserCollection = ({ date }) => {
   const form = useRef();
   const [success, setSuccess] = useState();
-  
-  
-  
-  
+
   const [now, setNow] = useState(
-    updateTime
-    
-    
+    date.toLocaleDateString() +
+      " " +
+      date.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      })
   );
-
-  // console.log(updateTime);
-
 
 
   const onBlur = (e) => {
     const pin = e.target.value;
 
-    const stafId = Number(pin);
-
+    const stafId = pin;
     const newPunch = { stafId, now };
+
+    
 
     fetch("https://boiling-cove-11605.herokuapp.com/punchs", {
       method: "POST",
@@ -59,12 +53,12 @@ const UserCollection = ({ updateTime }) => {
       <Container>
         <Row style={{ alignItems: "center", textAlign: "center" }}>
           <Col md={12}>
-            <div class="l-form">
-              <form ref={form} onBlur={onBlur} class="form">
-                <div class="form__div">
-                  <input class="form__input" />
-                  <label for="number" class="form__label">
-                    Number
+            <div className="l-form">
+              <form ref={form} onBlur={onBlur} className="form">
+                <div className="form__div">
+                  <input className="form__input" />
+                  <label htmlFor="number" className="form__label">
+                    Scan Your ID
                   </label>
                 </div>
               </form>

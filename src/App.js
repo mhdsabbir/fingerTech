@@ -5,7 +5,6 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import Attendance from "./Components/Attendance";
 import UserCollection from "./UserCollection/UserCollection";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -17,13 +16,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function App() {
-
   const [date, setDate] = React.useState(new Date());
-  
-  const [inputValue, setInputValue] = React.useState("");
-
   const [updateTime, setUpDateTime] = useState();
-
   useEffect(() => {
     setInterval(() => {
       setUpDateTime((date) => new Date());
@@ -41,7 +35,7 @@ function App() {
               
               </Item>
             <Item>
-              <UserCollection updateTime={updateTime} setUpDateTime={setUpDateTime}></UserCollection>
+              <UserCollection date={date} setDate={setDate} updateTime={updateTime} setUpDateTime={setUpDateTime}></UserCollection>
             </Item>
           </Grid>
           

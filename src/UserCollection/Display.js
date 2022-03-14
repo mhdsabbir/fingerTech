@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 
 const headers = [
-    {label: 'stafId', key: 'stafId'},
-    {label: 'now', key: 'now'}
+    {label: 'Pin', key: 'stafId'},
+    {label: 'Time', key: 'now'}
 ]
-
 
 const Display = () => {
   const [sheet, setSheet] = useState([]);
@@ -23,8 +22,10 @@ const Display = () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => setSheet(data));
-  }, []);
-  
+
+    }, []);
+
+    
   
 
   return (
