@@ -21,7 +21,10 @@ const UserCollection = ({ date, setDate }) => {
     );
     // console.log(inputValue);
 
-  const [now, setNow] = useState((date = date.toString()));
+    const [now, setNow] = useState((date = date.toLocaleDateString() + ' ' + date.toLocaleTimeString()));
+    // const [time, setTime] = useState((date = date.toLocaleTimeString()));
+
+  
 
   const sendStafAtt = (e) => {
     // pin = e.target.value
@@ -32,14 +35,12 @@ const UserCollection = ({ date, setDate }) => {
     const newPunch = { atten, inO, now };
 
     
-
-    // console.log(newPunch);
     const punch = {
       newPunch,
     };
-    console.log(punch);
 
-    fetch('http://localhost:5000/punchs',{
+
+    fetch('https://boiling-cove-11605.herokuapp.com/punchs',{
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -52,7 +53,6 @@ const UserCollection = ({ date, setDate }) => {
     })
 
     
-    e.preventDefault();
   };
 
   return (
@@ -60,7 +60,7 @@ const UserCollection = ({ date, setDate }) => {
       <Row style={{ alignItems: "center", textAlign: "center" }}>
         <Col md={12}>
           <div class="l-form">
-            <form ref={form} onSubmit={sendStafAtt} class="form">
+            <form ref={form} onBlur={sendStafAtt} class="form">
               <Autocomplete
                 value={inO}
                 onChange={(event, newValue) => {
