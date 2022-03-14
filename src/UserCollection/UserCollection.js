@@ -17,19 +17,13 @@ const UserCollection = ({ updateTime }) => {
   
   
   const [now, setNow] = useState(
-    updateTime =
-    updateTime.toLocaleDateString() +
-      " " +
-      updateTime.toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
-      })
+    updateTime
+    
     
   );
 
   console.log(updateTime);
+
 
 
   const onBlur = (e) => {
