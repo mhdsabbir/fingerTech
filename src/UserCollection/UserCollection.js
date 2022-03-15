@@ -13,17 +13,16 @@ const UserCollection = ({ date }) => {
       date.toLocaleTimeString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
-        second: "2-digit",
         hour12: true,
       })
   );
 
-
-  const onBlur = (e) => {
+  const hangle = (e) => {
     const pin = e.target.value;
-
+    
     const stafId = pin;
     const newPunch = { stafId, now };
+    
 
     
 
@@ -54,7 +53,7 @@ const UserCollection = ({ date }) => {
         <Row style={{ alignItems: "center", textAlign: "center" }}>
           <Col md={12}>
             <div className="l-form">
-              <form ref={form} onBlur={onBlur} className="form">
+              <form ref={form} onBlur={hangle} className="form">
                 <div className="form__div">
                   <input className="form__input" />
                   <label htmlFor="number" className="form__label">
@@ -67,7 +66,9 @@ const UserCollection = ({ date }) => {
           </Col>
         </Row>
         <Display></Display>
+        
       </Container>
+      
     </>
   );
 };

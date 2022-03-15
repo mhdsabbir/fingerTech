@@ -27,6 +27,8 @@ function App() {
     }, 1000);
   }, []);
 
+  // console.log(updateTime);
+
   return (
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
