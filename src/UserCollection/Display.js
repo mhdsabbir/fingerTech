@@ -30,7 +30,7 @@ const Display = () => {
 
   return (
     <div>
-      <CSVLink {...csvReport}>Export csv</CSVLink>
+      <CSVLink {...csvReport} className="">Export csv</CSVLink>
 
       
     </div>

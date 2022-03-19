@@ -7,6 +7,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import UserCollection from "./UserCollection/UserCollection";
 import { Card } from "react-bootstrap";
+import Scanned from "./Components/Scanned";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -48,12 +49,13 @@ function App() {
               <DateTime></DateTime>
             </Item>
             <Item>
-              <UserCollection
+              {/* <UserCollection
                 date={date}
                 setDate={setDate}
                 updateTime={updateTime}
                 setUpDateTime={setUpDateTime}
-              ></UserCollection>
+              ></UserCollection> */}
+              <Scanned></Scanned>
             </Item>
           </Grid>
         </Grid>
